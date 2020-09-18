@@ -1,13 +1,13 @@
-Function.prototype.defer = function(ms) {
-  let f = this;
-  return function(...args) {
-    setTimeout(() => f.apply(this, args), ms);
-  }
-};
+me = { name: 'Egor', age: 17};
 
-// check it
-function f(a, b) {
-  alert( a + b );
-}
+studentMe = Object.create(Object.getPrototypeOf(me));
 
-f.defer(1000)(1, 2); // выведет 3 через 1 секунду.
+studentMe.course = 4;
+studentMe.university = {name: 'SPbU', place: 'Russia'};
+
+let clone = Object.create(Object.getPrototypeOf(studentMe), Object.getOwnPropertyDescriptors(studentMe));
+
+clone.university.place = 'Germany ?';
+alert(clone.university.place); //Germany ?
+alert(studentMe.university.place); //Germany ?
+
