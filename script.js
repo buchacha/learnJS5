@@ -1,10 +1,29 @@
-class CoffeeMachine {
-  #waterLimit = 200;
+let sayMixin = {
+  say(phrase) {
+    alert(phrase);
+  }
+};
 
-  #checkWater(value) {
-    if (value < 0) throw new Error("Отрицательный уровень воды");
-    if (value > this.#waterLimit) throw new Error("Слишком много воды");
+let sayHiMixin = {
+  __proto__: sayMixin, // (или мы можем использовать Object.create для задания прототипа)
+
+  sayHi() {
+    // вызываем метод родителя
+    super.say(`Привет, ${this.name}`); // (*)
+  },
+  sayBye() {
+    super.say(`Пока, ${this.name}`); // (*)
+  }
+};
+
+class User {
+  constructor(name) {
+    this.name = name;
   }
 }
 
-let coffeeMachine = new CoffeeMachine();
+// копируем методы
+Object.assign(User.prototype, sayHiMixin);
+
+// теперь User может сказать Привет
+new User("Вася").sayHi(); // Привет, Вася!
