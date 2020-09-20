@@ -1,6 +1,21 @@
-let lowResolutionClock = new ExtendedClock({
-    template: 'h:m:s',
-    precision: 100
-  });
+class Article {
+  constructor(title, date) {
+    this.title = title;
+    this.date = date;
+  }
 
-  lowResolutionClock.start();
+  static compare(articleA, articleB) {
+    return articleA.date - articleB.date;
+  }
+}
+
+// использование
+let articles = [
+  new Article("HTML", new Date(2019, 1, 1)),
+  new Article("CSS", new Date(2019, 0, 1)),
+  new Article("JavaScript", new Date(2019, 11, 1))
+];
+
+articles.sort(Article.compare);
+
+alert( articles[0].title ); // CSS
