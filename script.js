@@ -1,16 +1,17 @@
-let arr = [1,2,3,4,5];
-
-let handler = 5;
-
-let n = 4;
-alert(arr.splice(n--,1));
-
-alert(n);
-
-for (let i = 0; i < arr.length; i++) {
-    if (arr[i] === handler) {
-        arr.splice(i--, 1);
-    }
+// Создадим класс
+class Menu {
+  choose(value) {
+    this.trigger("select", value);
+  }
 }
 
-alert(arr);
+// Добавим примесь с методами для событий
+Object.assign(Menu.prototype, eventMixin);
+
+let menu = new Menu();
+
+// Добавить обработчик, который будет вызван при событии "select":
+menu.on("select", value => alert(`Выбранное значение: ${value}`));
+
+// Генерирует событие => обработчик выше запускается и выводит:
+menu.choose("123"); // Выбранное значение: 123
