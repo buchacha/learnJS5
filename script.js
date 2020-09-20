@@ -1,14 +1,10 @@
 class CoffeeMachine {
-  _waterAmount = 0;
+  #waterLimit = 200;
 
-  setWaterAmount(value) {
-    if (value < 0) throw new Error("Отрицательное количество воды");
-    this._waterAmount = value;
-  }
-
-  getWaterAmount() {
-    return this._waterAmount;
+  #checkWater(value) {
+    if (value < 0) throw new Error("Отрицательный уровень воды");
+    if (value > this.#waterLimit) throw new Error("Слишком много воды");
   }
 }
 
-new CoffeeMachine().setWaterAmount(100);
+let coffeeMachine = new CoffeeMachine();
