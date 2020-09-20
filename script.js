@@ -1,17 +1,14 @@
-class Article {
-  constructor(title, date) {
-    this.title = title;
-    this.date = date;
-    alert(this);
+class CoffeeMachine {
+  _waterAmount = 0;
+
+  setWaterAmount(value) {
+    if (value < 0) throw new Error("Отрицательное количество воды");
+    this._waterAmount = value;
   }
 
-  static createTodays() {
-    // помним, что this = Article
-    alert(this);
-    return new this("Сегодняшний дайджест", new Date());
+  getWaterAmount() {
+    return this._waterAmount;
   }
 }
 
-let article = Article.createTodays();
-
-alert( article.title ); // Сегодняшний дайджест
+new CoffeeMachine().setWaterAmount(100);
